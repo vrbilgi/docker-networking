@@ -35,15 +35,16 @@ func main() {
 	for {
 		netData, err := bufio.NewReader(c).ReadString('\n')
 		if err != nil {
-			fmt.Println(err)
+			fmt.Println("Received error: ", err.Error())
 			return
 		}
+
+		fmt.Print("-> ", string(netData))
 		if strings.TrimSpace(string(netData)) == "STOP" {
 			fmt.Println("Exiting TCP server!")
 			return
 		}
 
-		fmt.Print("-> ", string(netData))
 		t := time.Now()
 		myTime := "received message at " + t.Format(time.RFC3339) + "\n"
 		c.Write([]byte(myTime))
