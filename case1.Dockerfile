@@ -11,21 +11,20 @@ RUN go build -o ./server
 # exe name and argmunent
 CMD ["./server", "8090"]
 
-# server 
-# to build docker image
-# docker build -t server-demo .
-# to run the command
-# docker run -p 8080:8090 server-demo 
+# Server 
+# To build docker image
+#   docker build -t server-demo -f case1.Dockerfile .
+# To run the command
+#   docker run --name server-demo-1 -p 8080:8090 -d server-demo 
 
-# client
-# go build client.go
+# Client
+#   go build client.go
+#   ./client 0.0.0.0:8080
 
-# ./client 0.0.0.0:8090
-
-# to check the docker image is not running or not
-# docker ps
-# to get into the docker image
-# docker exec -it 6dc6e63f94c2 sh  
+# To check the docker image is not running or not
+#   docker ps -a
+# To get into the docker image
+#   docker exec -it server-demo-1 sh  
 
 
 
