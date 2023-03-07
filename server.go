@@ -3,24 +3,22 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"net"
 	"os"
 	"strings"
 	"time"
-	"log"
-	"log/syslog"
 )
 
-
 func main() {
+	logFile := "/var/lib/volume/server.log"
+	logWriter, err := os.OpenFile(logFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 
-	logWriter, err := os.OpenFile("Server.log", os.O_RDWR | os.O_CREATE | os.O_APPEND, 0666)
-
-if err != nil {
-    log.Fatalf("error opening file: %v", err)
-}
-log.SetOutput(logWriter)
-defer logWriter.Close()
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	log.SetOutput(logWriter)
+	defer logWriter.Close()
 
 	arguments := os.Args
 	if len(arguments) == 1 {
