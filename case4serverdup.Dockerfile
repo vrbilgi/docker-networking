@@ -1,25 +1,21 @@
-# case 2: 
-# client is deployed in container and server is running from outside 
+# case 1: 
+# server is deployed in container and client is running from outside 
 
 FROM golang:1.19-alpine
 WORKDIR /app
-COPY . .
+COPY server.go ./.
 # required for golang
 COPY go.mod ./.  
 # go build command
-#RUN go build -o ./client
-RUN go build server.go 
-
+RUN go build -o ./server
 # exe name and argmunent
-#CMD ["./client", "20.0.0.2:8090"]
-CMD ["./server", "8090"]
-
+CMD ["./server", "9000"]
 
 # server 
 # to build docker image
 # docker build -t server-demo .
 # to run the command
-# docker run -p 8080:8090 server-demo 
+# case4server 
 
 # client
 # go build client.go

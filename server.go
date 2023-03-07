@@ -51,10 +51,12 @@ defer logWriter.Close()
 	for {
 		netData, err := bufio.NewReader(c).ReadString('\n')
 		if err != nil {
-			fmt.Println(err)
-			log.Fatalln(err)
+			fmt.Println("Received error: ", err.Error())
+			log.Fatalln("Received error: ", err.Error())
 			return
 		}
+
+		fmt.Print("-> ", string(netData))
 		if strings.TrimSpace(string(netData)) == "STOP" {
 			fmt.Println("Exiting TCP server!")
 			log.Println("Exiting TCP server!")
@@ -63,6 +65,7 @@ defer logWriter.Close()
 
 		fmt.Print("-> ", string(netData))
 		log.Println("-> ", string(netData))
+
 		t := time.Now()
 		myTime := "received message at " + t.Format(time.RFC3339) + "\n"
 		c.Write([]byte(myTime))

@@ -1,0 +1,9 @@
+One liner to stop / remove all of Docker containers:
+
+docker stop $(docker ps -a -q) &&  docker rm $(docker ps -a -q)
+
+
+-------------
+
+docker run --name server-4-dup --network server-network -p 8090:8090 --cap-add=NET_ADMIN -d server-4-dup
+

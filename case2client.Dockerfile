@@ -3,17 +3,15 @@
 
 FROM golang:1.19-alpine
 WORKDIR /app
-COPY . .
+COPY client.go server.go ./.
 # required for golang
 COPY go.mod ./.  
 # go build command
-#RUN go build -o ./client
-RUN go build server.go 
-
+RUN go build client.go 
+RUN go build server.go
 # exe name and argmunent
-#CMD ["./client", "20.0.0.2:8090"]
+#CMD ["./client", "0.0.0.0:8090"]
 CMD ["./server", "8090"]
-
 
 # server 
 # to build docker image
