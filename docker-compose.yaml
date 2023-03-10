@@ -1,0 +1,24 @@
+version: "3"
+services:
+  volume-server:
+    build:
+      dockerfile: ./volume-1.Dockerfile
+      context: ./
+    ports:
+      - "8090:8090"
+    volumes:
+      - /Users/raghavnayak/go/src/github.com/docker-networking/local_volume_dir:/var/lib/volume
+    depends_on:
+      - redis
+    deploy:
+      resources:
+        limits:
+          cpus: '0.01'
+          memory: 50M
+        reservations:
+          cpus: '0.001'
+          memory: 20M
+  redis:
+    image: redis
+    ports:
+      - "8000:6379"
